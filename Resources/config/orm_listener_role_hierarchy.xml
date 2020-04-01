@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Role Hierarchy Doctrine ORM Listener -->
+        <service id="klipper_security.role_hierarchy.cache.listener"
+                 class="Klipper\Component\Security\Doctrine\ORM\Listener\RoleHierarchyListener">
+            <tag name="doctrine.event_subscriber" priority="252"/>
+            <argument type="service" id="klipper_security.security_identity_manager"/>
+            <argument type="service" id="klipper_security.role_hierarchy.cache" on-invalid="null"/>
+            <argument type="service" id="klipper_security.organizational_context" on-invalid="null"/>
+        </service>
+    </services>
+</container>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Expression Variable Storage -->
+        <service id="klipper_security.expression.variable_storage" class="Klipper\Component\Security\Expression\ExpressionVariableStorage" public="true">
+            <argument/>
+            <argument type="service" id="klipper_security.security_identity_manager" on-invalid="ignore" />
+            <tag name="klipper_security.event_subscriber"/>
+            <call method="add">
+                <argument>trust_resolver</argument>
+                <argument type="service" id="security.authentication.trust_resolver"/>
+            </call>
+        </service>
+    </services>
+</container>

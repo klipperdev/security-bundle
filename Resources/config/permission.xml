@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Permission Manager -->
+        <service id="klipper_security.permission_manager"
+                 class="Klipper\Component\Security\Permission\PermissionManager"
+                 public="true">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="klipper_security.permission_provider"/>
+            <argument type="service" id="property_accessor"/>
+            <argument type="service" id="klipper_security.permission_factory" on-invalid="ignore"/>
+            <argument type="service" id="klipper_security.sharing_manager" on-invalid="ignore"/>
+        </service>
+
+        <service id="Klipper\Component\Security\Permission\PermissionManager" alias="klipper_security.permission_manager" />
+        <service id="Klipper\Component\Security\Permission\PermissionManagerInterface" alias="klipper_security.permission_manager" />
+
+        <!-- Permission Factory -->
+        <service id="klipper_security.permission_factory"
+                 class="Klipper\Component\Security\Permission\PermissionFactory"
+                 public="false">
+            <argument type="service" id="klipper_security.permission_loader" />
+            <argument type="service" id="klipper_security.permission.array_resource" />
+            <argument type="collection"/>
+        </service>
+
+        <service id="klipper_security.permission.array_resource"
+                 class="Klipper\Component\Config\ArrayResource"
+                 public="false">
+            <argument type="collection" />
+            <call method="add">
+                <argument>.</argument>
+                <argument>config</argument>
+            </call>
+        </service>
+
+        <service id="Klipper\Component\Security\Permission\PermissionFactory" alias="klipper_security.permission_factory" />
+        <service id="Klipper\Component\Security\Permission\PermissionFactoryInterface" alias="klipper_security.permission_factory" />
+
+        <!-- Permission Factory Cache -->
+        <service id="klipper_security.permission_factory.cache"
+                 class="Klipper\Component\Security\Permission\CachePermissionFactory"
+                 decorates="klipper_security.permission_factory"
+                 public="false">
+            <argument type="service" id="klipper_security.permission_factory.cache.inner" />
+            <argument type="collection">
+                <argument key="cache_dir">%kernel.cache_dir%/klipper_security</argument>
+            </argument>
+            <call method="setConfigCacheFactory">
+                <argument type="service" id="config_cache_factory" />
+            </call>
+        </service>
+
+        <service id="klipper_security.permission_factory.warmer"
+                 class="Klipper\Component\Security\Permission\PermissionFactoryCacheWarmer"
+                 public="false">
+            <tag name="container.service_subscriber" />
+            <tag name="kernel.cache_warmer" />
+            <argument type="service" id="Psr\Container\ContainerInterface" />
+        </service>
+
+        <!-- Permission Loader -->
+        <service id="klipper_security.permission_resolver"
+                 class="Symfony\Component\Config\Loader\LoaderResolver"
+                 public="false">
+            <argument type="collection" />
+        </service>
+
+        <service id="klipper_security.permission_loader"
+                 class="Symfony\Component\Config\Loader\DelegatingLoader"
+                 public="false">
+            <argument type="service" id="klipper_security.permission_resolver" />
+        </service>
+
+        <service id="klipper_security.permission_loader.array_resource"
+                 class="Klipper\Component\Security\Permission\Loader\ArrayResourceLoader"
+                 public="false">
+            <tag name="klipper_security.permission_loader" priority="200" />
+        </service>
+
+        <service id="klipper_security.permission_loader.configuration"
+                 class="Klipper\Component\Security\Permission\Loader\ConfigurationLoader"
+                 public="false">
+            <tag name="klipper_security.permission_loader" priority="100" />
+            <argument type="collection"/>
+        </service>
+
+        <!-- Disable Permission Subscriber -->
+        <service id="klipper_security.subscriber.permission.disable"
+                 class="Klipper\Component\Security\Listener\DisablePermissionSubscriber">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="service" id="klipper_security.permission_manager"/>
+        </service>
+
+        <!-- Permission Exception Listener -->
+        <service id="klipper_security.listener.permission_exception"
+                 class="Klipper\Component\Security\Listener\PermissionExceptionListener">
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException"/>
+        </service>
+
+        <!-- Voter -->
+        <service id="klipper_security.access.permission_voter"
+                 class="Klipper\Component\Security\Authorization\Voter\PermissionVoter"
+                 public="false">
+            <argument type="service" id="klipper_security.permission_manager"/>
+            <argument type="service" id="klipper_security.security_identity_manager"/>
+            <argument>true</argument>
+            <tag name="security.voter" priority="260"/>
+        </service>
+    </services>
+</container>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Authentication Provider -->
+        <service id="klipper_security.authentication.provider.host_roles"
+                 class="Klipper\Component\Security\Authentication\Provider\HostRoleProvider">
+            <argument type="collection"/>
+        </service>
+
+        <!-- Security Firewall -->
+        <service id="klipper_security.authentication.listener.host_roles"
+                 class="Klipper\Component\Security\Firewall\HostRoleListener">
+            <argument type="service" id="klipper_security.security_identity_manager"/>
+            <argument type="collection"/>
+        </service>
+    </services>
+</container>

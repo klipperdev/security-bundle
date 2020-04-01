@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Security Identity Manager -->
+        <service id="klipper_security.security_identity_manager"
+                 class="Klipper\Component\Security\Identity\CacheSecurityIdentityManager"
+                 public="true">
+            <argument type="service" id="event_dispatcher"/>
+            <argument type="service" id="security.role_hierarchy"/>
+            <argument type="service" id="security.authentication.trust_resolver"/>
+        </service>
+
+        <service id="Klipper\Component\Security\Identity\CacheSecurityIdentityManager" alias="klipper_security.security_identity_manager" />
+        <service id="Klipper\Component\Security\Identity\CacheSecurityIdentityManagerInterface" alias="klipper_security.security_identity_manager" />
+    </services>
+
+</container>

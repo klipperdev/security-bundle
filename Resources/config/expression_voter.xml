@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Override Security Access Expression Voter -->
+        <service id="security.access.expression_voter" class="Klipper\Component\Security\Authorization\Voter\ExpressionVoter" public="false">
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="security.expression_language" />
+            <tag name="security.voter" priority="245" />
+        </service>
+    </services>
+</container>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Object Filter -->
+        <service id="klipper_security.object_filter"
+                 class="Klipper\Component\Security\ObjectFilter\ObjectFilter"
+                 public="true">
+            <argument type="service" id="klipper_security.object_filter.extension"/>
+            <argument type="service" id="klipper_security.permission_manager"/>
+            <argument type="service" id="security.authorization_checker"/>
+            <argument type="service" id="event_dispatcher"/>
+        </service>
+
+        <service id="Klipper\Component\Security\ObjectFilter\ObjectFilter" alias="klipper_security.object_filter" />
+        <service id="Klipper\Component\Security\ObjectFilter\ObjectFilterInterface" alias="klipper_security.object_filter" />
+
+        <!-- Object Filter Extension -->
+        <service id="klipper_security.object_filter.extension"
+                 class="Klipper\Component\Security\ObjectFilter\ObjectFilterExtension"
+                 public="false">
+            <argument type="collection"/>
+            <property name="container" type="service" id="service_container"/>
+        </service>
+
+        <!-- Object Filter Voter -->
+        <service id="klipper_security.object_filter.voter.mixed"
+                 class="Klipper\Component\Security\ObjectFilter\MixedValue"
+                 public="false">
+            <tag name="klipper_security.object_filter.voter" priority="-255"/>
+        </service>
+    </services>
+</container>

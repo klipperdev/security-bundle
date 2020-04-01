@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Doctrine ORM Sharing Delete Listener -->
+        <service id="klipper_security.orm.listener.sharing_delete"
+                 class="Klipper\Bundle\SecurityBundle\Doctrine\ORM\Listener\SharingDeleteListenerContainerAware">
+            <tag name="doctrine.event_subscriber" priority="1"/>
+            <property name="container" type="service" id="service_container"/>
+        </service>
+    </services>
+</container>

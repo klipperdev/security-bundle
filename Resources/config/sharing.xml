@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Sharing Manager -->
+        <service id="klipper_security.sharing_manager"
+                 class="Klipper\Component\Security\Sharing\SharingManager"
+                 public="true">
+            <argument type="service" id="klipper_security.sharing_provider"/>
+            <argument type="service" id="klipper_security.sharing_factory" />
+            <call method="setEventDispatcher">
+                <argument type="service" id="event_dispatcher" on-invalid="ignore"/>
+            </call>
+        </service>
+
+        <service id="Klipper\Component\Security\Sharing\SharingManager" alias="klipper_security.sharing_manager" />
+        <service id="Klipper\Component\Security\Sharing\SharingManagerInterface" alias="klipper_security.sharing_manager" />
+
+        <!-- Sharing Factory -->
+        <service id="klipper_security.sharing_factory"
+                 class="Klipper\Component\Security\Sharing\SharingFactory"
+                 public="false">
+            <argument type="service" id="klipper_security.sharing_subject_loader" />
+            <argument type="service" id="klipper_security.sharing_identity_loader" />
+            <argument type="service" id="klipper_security.permission.array_resource" />
+        </service>
+
+        <service id="klipper_security.sharing.array_resource"
+                 class="Klipper\Component\Config\ArrayResource"
+                 public="false">
+            <argument type="collection" />
+            <call method="add">
+                <argument>.</argument>
+                <argument>config</argument>
+            </call>
+        </service>
+
+        <service id="Klipper\Component\Security\Sharing\SharingFactory" alias="klipper_security.sharing_factory" />
+        <service id="Klipper\Component\Security\Sharing\SharingFactoryInterface" alias="klipper_security.sharing_factory" />
+
+        <!-- Sharing Factory Cache -->
+        <service id="klipper_security.sharing_factory.cache"
+                 class="Klipper\Component\Security\Sharing\CacheSharingFactory"
+                 decorates="klipper_security.sharing_factory"
+                 public="false">
+            <argument type="service" id="klipper_security.sharing_factory.cache.inner" />
+            <argument type="collection">
+                <argument key="cache_dir">%kernel.cache_dir%/klipper_security</argument>
+            </argument>
+            <call method="setConfigCacheFactory">
+                <argument type="service" id="config_cache_factory" />
+            </call>
+        </service>
+
+        <service id="klipper_security.sharing_factory.warmer"
+                 class="Klipper\Component\Security\Sharing\SharingFactoryCacheWarmer"
+                 public="false">
+            <tag name="container.service_subscriber" />
+            <tag name="kernel.cache_warmer" />
+            <argument type="service" id="Psr\Container\ContainerInterface" />
+        </service>
+
+        <!-- Sharing Subject Loader -->
+        <service id="klipper_security.sharing_subject_resolver"
+                 class="Symfony\Component\Config\Loader\LoaderResolver"
+                 public="false">
+            <argument type="collection" />
+        </service>
+
+        <service id="klipper_security.sharing_subject_loader"
+                 class="Symfony\Component\Config\Loader\DelegatingLoader"
+                 public="false">
+            <argument type="service" id="klipper_security.sharing_subject_resolver" />
+        </service>
+
+        <service id="klipper_security.sharing_subject_loader.array_resource"
+                 class="Klipper\Component\Security\Sharing\Loader\SubjectArrayResourceLoader"
+                 public="false">
+            <tag name="klipper_security.sharing_subject_loader" priority="200" />
+        </service>
+
+        <service id="klipper_security.sharing_subject_loader.configuration"
+                 class="Klipper\Component\Security\Sharing\Loader\SubjectConfigurationLoader"
+                 public="false">
+            <tag name="klipper_security.sharing_subject_loader" priority="100" />
+            <argument type="collection"/>
+        </service>
+
+        <!-- Sharing Identity Loader -->
+        <service id="klipper_security.sharing_identity_resolver"
+                 class="Symfony\Component\Config\Loader\LoaderResolver"
+                 public="false">
+            <argument type="collection" />
+        </service>
+
+        <service id="klipper_security.sharing_identity_loader"
+                 class="Symfony\Component\Config\Loader\DelegatingLoader"
+                 public="false">
+            <argument type="service" id="klipper_security.sharing_identity_resolver" />
+        </service>
+
+        <service id="klipper_security.sharing_identity_loader.array_resource"
+                 class="Klipper\Component\Security\Sharing\Loader\IdentityArrayResourceLoader"
+                 public="false">
+            <tag name="klipper_security.sharing_identity_loader" priority="200" />
+        </service>
+
+        <service id="klipper_security.sharing_identity_loader.configuration"
+                 class="Klipper\Component\Security\Sharing\Loader\IdentityConfigurationLoader"
+                 public="false">
+            <tag name="klipper_security.sharing_identity_loader" priority="100" />
+            <argument type="collection"/>
+        </service>
+    </services>
+</container>
