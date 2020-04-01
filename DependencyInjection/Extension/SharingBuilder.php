@@ -153,8 +153,6 @@ class SharingBuilder implements ExtensionBuilderInterface
      * @param ContainerBuilder $container The container
      * @param string           $type      The sharing subject type
      * @param array            $config    The sharing subject config
-     *
-     * @return Reference
      */
     private function buildSharingSubjectConfig(ContainerBuilder $container, string $type, array $config): Reference
     {
@@ -182,8 +180,6 @@ class SharingBuilder implements ExtensionBuilderInterface
      * @param ContainerBuilder $container The container
      * @param string           $type      The sharing identity type
      * @param array            $config    The sharing identity config
-     *
-     * @return Reference
      */
     private function buildSharingIdentityConfig(ContainerBuilder $container, string $type, array $config): Reference
     {

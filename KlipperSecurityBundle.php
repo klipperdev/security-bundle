@@ -61,7 +61,7 @@ class KlipperSecurityBundle extends Bundle
                 'event_dispatcher',
                 'klipper_security.event_listener',
                 'klipper_security.event_subscriber'
-        ),
+            ),
             PassConfig::TYPE_BEFORE_REMOVING
         );
     }

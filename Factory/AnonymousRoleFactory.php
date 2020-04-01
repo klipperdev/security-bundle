@@ -54,8 +54,6 @@ class AnonymousRoleFactory extends AbstractRoleFactory
 
     /**
      * @param null|bool|string $v
-     *
-     * @return null|string
      */
     private function getAnonymousRole($v): ?string
     {

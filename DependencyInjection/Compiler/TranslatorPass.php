@@ -53,8 +53,6 @@ class TranslatorPass implements CompilerPassInterface
      * @param ContainerBuilder $container The container
      *
      * @throws
-     *
-     * @return array
      */
     private function getTranslationFiles(ContainerBuilder $container): array
     {
@@ -74,8 +72,6 @@ class TranslatorPass implements CompilerPassInterface
      * Find the translation files.
      *
      * @param string $dir The directory of translation files
-     *
-     * @return array
      */
     private function findTranslationFiles(string $dir): array
     {

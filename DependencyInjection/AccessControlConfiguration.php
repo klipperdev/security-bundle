@@ -43,8 +43,6 @@ class AccessControlConfiguration implements ConfigurationInterface
 
     /**
      * Get access control node.
-     *
-     * @return NodeDefinition
      */
     private function getAccessControlNode(): NodeDefinition
     {

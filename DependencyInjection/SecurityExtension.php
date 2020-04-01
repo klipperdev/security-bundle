@@ -71,8 +71,6 @@ class SecurityExtension extends Extension
      *
      * @param array            $config    The config
      * @param ContainerBuilder $container The container
-     *
-     * @return ConfigurationInterface
      */
     public function getConfiguration(array $config, ContainerBuilder $container): ConfigurationInterface
     {

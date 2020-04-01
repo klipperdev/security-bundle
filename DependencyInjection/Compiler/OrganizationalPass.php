@@ -56,8 +56,6 @@ class OrganizationalPass implements CompilerPassInterface
      *
      * @param ContainerBuilder $container The container
      * @param string           $serviceId The service id defined in config
-     *
-     * @return string
      */
     protected function getServiceId(ContainerBuilder $container, string $serviceId): string
     {

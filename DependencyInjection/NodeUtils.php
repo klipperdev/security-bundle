@@ -25,8 +25,6 @@ abstract class NodeUtils
      *
      * @param string           $name    The name of the root node
      * @param null|NodeBuilder $builder The node builder
-     *
-     * @return ArrayNodeDefinition
      */
     public static function createArrayNode(string $name, NodeBuilder $builder = null): ArrayNodeDefinition
     {

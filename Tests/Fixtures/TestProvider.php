@@ -41,4 +41,3 @@ function fn_namespaced()
 {
     return true;
 }
-

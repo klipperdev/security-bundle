@@ -53,8 +53,6 @@ abstract class AbstractRoleFactory implements SecurityFactoryInterface
      * Get the service id.
      *
      * @param string $type The type
-     *
-     * @return string
      */
     protected function getServiceId($type): string
     {

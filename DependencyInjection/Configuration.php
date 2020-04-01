@@ -67,8 +67,6 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Get host role node.
-     *
-     * @return NodeDefinition
      */
     private function getHostRoleNode(): NodeDefinition
     {
@@ -80,8 +78,6 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Get anonymous role node.
-     *
-     * @return NodeDefinition
      */
     private function getAnonymousRoleNode(): NodeDefinition
     {
@@ -93,8 +89,6 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Get role hierarchy node.
-     *
-     * @return NodeDefinition
      */
     private function getRoleHierarchyNode(): NodeDefinition
     {
@@ -109,8 +103,6 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Get security voter node.
-     *
-     * @return NodeDefinition
      */
     private function getSecurityVoterNode(): NodeDefinition
     {
@@ -126,8 +118,6 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Get object filter node.
-     *
-     * @return NodeDefinition
      */
     private function getObjectFilterNode(): NodeDefinition
     {
@@ -148,8 +138,6 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Get organizational context node.
-     *
-     * @return NodeDefinition
      */
     private function getOrganizationalContextNode(): NodeDefinition
     {
@@ -164,8 +152,6 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Get expression language node.
-     *
-     * @return NodeDefinition
      */
     private function getExpressionLanguageNode(): NodeDefinition
     {
@@ -187,8 +173,6 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Get annotation node.
-     *
-     * @return NodeDefinition
      */
     private function getAnnotationNode(): NodeDefinition
     {
@@ -207,8 +191,6 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Get permission node.
-     *
-     * @return NodeDefinition
      */
     private function getFieldConfigPermissionNode(): NodeDefinition
     {
@@ -227,8 +209,6 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Get permission node.
-     *
-     * @return NodeDefinition
      */
     private function getPermissionNode(): NodeDefinition
     {
@@ -265,8 +245,6 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Get permission fields node.
-     *
-     * @return NodeDefinition
      */
     private function getPermissionFieldsNode(): NodeDefinition
     {
@@ -302,8 +280,6 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Get sharing node.
-     *
-     * @return NodeDefinition
      */
     private function getSharingNode(): NodeDefinition
     {
@@ -353,8 +329,6 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Get doctrine node.
-     *
-     * @return NodeDefinition
      */
     private function getDoctrineNode(): NodeDefinition
     {

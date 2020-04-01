@@ -37,8 +37,6 @@ abstract class AbstractSecurityExtensionTest extends TestCase
      * @param array $services   The service definitions
      *
      * @throws
-     *
-     * @return ContainerBuilder
      */
     protected function createContainer(array $configs = [], array $parameters = [], array $services = []): ContainerBuilder
     {

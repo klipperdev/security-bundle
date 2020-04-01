@@ -55,8 +55,6 @@ class PermissionBuilder implements ExtensionBuilderInterface
      * @param ContainerBuilder $container The container
      * @param string           $type      The type of permission
      * @param array            $config    The config of permissions
-     *
-     * @return Reference
      */
     private function buildPermissionConfig(ContainerBuilder $container, string $type, array $config): Reference
     {
@@ -120,8 +118,6 @@ class PermissionBuilder implements ExtensionBuilderInterface
      * @param string           $type      The type of permission
      * @param array            $arguments The config class arguments
      * @param null|string      $field     The field of permission
-     *
-     * @return Reference
      */
     private function createConfigDefinition(ContainerBuilder $container, string $class, string $type, array $arguments, ?string $field = null): Reference
     {
@@ -161,8 +157,6 @@ class PermissionBuilder implements ExtensionBuilderInterface
      *
      * @param \ReflectionClass $reflectionClass The reflection class
      * @param string           $field           The field name
-     *
-     * @return bool
      */
     private function isValidField(\ReflectionClass $reflectionClass, string $field): bool
     {

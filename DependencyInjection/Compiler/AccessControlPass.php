@@ -98,8 +98,6 @@ class AccessControlPass implements CompilerPassInterface
      * @param array                $methods    The request methods
      * @param null|string|string[] $ips        The client ip
      * @param array                $attributes The attributes
-     *
-     * @return Reference
      */
     private function createRequestMatcher(
         ContainerBuilder $container,
@@ -140,8 +138,6 @@ class AccessControlPass implements CompilerPassInterface
      *
      * @param ContainerBuilder $container  The container
      * @param string           $expression The expression
-     *
-     * @return Reference
      */
     private function createExpression(ContainerBuilder $container, string $expression): Reference
     {
@@ -157,7 +153,7 @@ class AccessControlPass implements CompilerPassInterface
                 $this->getExpressionLanguage($container)->parse(
                     $expression,
                     self::$availableExpressionNames
-            )->getNodes()
+                )->getNodes()
             ))
         ;
 
@@ -168,8 +164,6 @@ class AccessControlPass implements CompilerPassInterface
      * Get the expression language.
      *
      * @param ContainerBuilder $container The container
-     *
-     * @return ExpressionLanguage
      */
     private function getExpressionLanguage(ContainerBuilder $container): ExpressionLanguage
     {
