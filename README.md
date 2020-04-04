@@ -10,7 +10,7 @@ sharing rule.
 Features include:
 
 - All features of [Klipper Security](https://github.com/klipperdev/security)
-- Configurator of all Klipper Security features
+- Configurator for Symfony Framework Bundle
 - Override the security access control config to allow to use custom expression language
   functions defined with the tag `security.expression_language_provider` in `allow_if` option
   (expressions are compiled on cache compilation)
