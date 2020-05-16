@@ -22,7 +22,7 @@
     "require-dev": {
         "symfony/form": "^4.4.0",
         "symfony/translation": "^4.4.0",
-        "doctrine/doctrine-bundle": "^1.9.0",
+        "doctrine/doctrine-bundle": "^2.0.0",
         "doctrine/orm": "^2.6.0"
     },
     "autoload": {
