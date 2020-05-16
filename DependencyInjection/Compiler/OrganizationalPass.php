@@ -59,6 +59,7 @@ class OrganizationalPass implements CompilerPassInterface
      */
     protected function getServiceId(ContainerBuilder $container, string $serviceId): string
     {
+        $serviceId = $container->hasAlias($serviceId) ? (string) $container->getAlias($serviceId) : $serviceId;
         $definition = $container->getDefinition($serviceId);
         $interfaces = class_implements($definition->getClass());
 
