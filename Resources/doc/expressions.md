@@ -51,11 +51,11 @@ security:
 You can use the is_granted function like:
 
 ```
-is_granted("perm_<PERMSSION>")
-is_granted("perm_<PERMSSION>", "<CLASS_NAME>")
-is_granted("perm_<PERMSSION>", <OBJECT_INSTANCE>)
-is_granted("perm_<PERMSSION>", ["<CLASS_NAME>", "<FIELD_NAME>"])
-is_granted("perm_<PERMSSION>", [<OBJECT_INSTANCE>, "<FIELD_NAME>"])
+is_granted("perm:<PERMSSION>")
+is_granted("perm:<PERMSSION>", "<CLASS_NAME>")
+is_granted("perm:<PERMSSION>", <OBJECT_INSTANCE>)
+is_granted("perm:<PERMSSION>", ["<CLASS_NAME>", "<FIELD_NAME>"])
+is_granted("perm:<PERMSSION>", [<OBJECT_INSTANCE>, "<FIELD_NAME>"])
 ```
 
 **Example:**
@@ -66,8 +66,8 @@ security:
     # ...
 
     access_control:
-        - { path: '^/admin/groups', allow_if: 'is_granted("perm_manage_security")' }
-        - { path: '^/admin/groups/{id}', allow_if: 'is_granted("perm_view", id)' }
+        - { path: '^/admin/groups', allow_if: 'is_granted("perm:manage_security")' }
+        - { path: '^/admin/groups/{id}', allow_if: 'is_granted("perm:view", id)' }
 ```
 
 ### Use the is_organization function

@@ -12,7 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 MyController {
     /**
-     * @Security("is_granted('perm_view', 'App\Entity\Post')")
+     * @Security("is_granted('perm:view', 'App\Entity\Post')")
      */
     public function getPostsAction()
     {
@@ -20,7 +20,7 @@ MyController {
     }
 
     /**
-     * @Security("is_granted('perm_update', post)
+     * @Security("is_granted('perm:update', post)
      */
     public function getPostAction(PostInterface $post)
     {

@@ -168,13 +168,13 @@ can used the same services to validate the authorizations (see the
 details).
 
 Consequently, this library work with the Symfony Authorization Checker, using the
-prefix `perm_` before the permission name.
+prefix `perm:` before the permission name.
 
 **Check the authorization on the object:**
 
 ```php
-$this->get('security.authorization_checker')->isGranted('perm_update', $entity);
-$this->get('security.authorization_checker')->isGranted('perm_update', PostInterface::class);
+$this->get('security.authorization_checker')->isGranted('perm:update', $entity);
+$this->get('security.authorization_checker')->isGranted('perm:update', PostInterface::class);
 ```
 
 **Check the authorization on the field of object:**
@@ -182,8 +182,8 @@ $this->get('security.authorization_checker')->isGranted('perm_update', PostInter
 ```php
 use Klipper\Component\Security\Permission\FieldVote;
 
-$this->get('security.authorization_checker')->isGranted('perm_edit', new FieldVote($entity, 'title'));
-$this->get('security.authorization_checker')->isGranted('perm_edit', new FieldVote(PostInterface::class, 'title'));
+$this->get('security.authorization_checker')->isGranted('perm:edit', new FieldVote($entity, 'title'));
+$this->get('security.authorization_checker')->isGranted('perm:edit', new FieldVote(PostInterface::class, 'title'));
 ```
 
 ### What is the contexts field in permission class
