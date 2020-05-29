@@ -14,6 +14,8 @@
             <argument type="service" id="security.authentication.trust_resolver"/>
         </service>
 
+        <service id="Klipper\Component\Security\Identity\SecurityIdentityManager" alias="klipper_security.security_identity_manager" />
+        <service id="Klipper\Component\Security\Identity\SecurityIdentityManagerInterface" alias="klipper_security.security_identity_manager" />
         <service id="Klipper\Component\Security\Identity\CacheSecurityIdentityManager" alias="klipper_security.security_identity_manager" />
         <service id="Klipper\Component\Security\Identity\CacheSecurityIdentityManagerInterface" alias="klipper_security.security_identity_manager" />
     </services>
