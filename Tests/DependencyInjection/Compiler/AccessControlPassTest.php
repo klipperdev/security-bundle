@@ -44,7 +44,7 @@ final class AccessControlPassTest extends TestCase
     protected $accessControl = [
         [
             'path' => '^/path/',
-            'allow_if' => 'has_role("ROLE_ADMIN") and identity("input")',
+            'allow_if' => 'is_granted("ROLE_ADMIN") and identity("input")',
             'requires_channel' => null,
             'host' => null,
             'ips' => [],
@@ -53,7 +53,7 @@ final class AccessControlPassTest extends TestCase
         ],
         [
             'path' => '^/path/',
-            'allow_if' => 'has_role("ROLE_ADMIN") and identity("input")',
+            'allow_if' => 'is_granted("ROLE_ADMIN") and identity("input")',
             'requires_channel' => null,
             'host' => null,
             'ips' => [],
