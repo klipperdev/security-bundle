@@ -39,14 +39,14 @@ final class ValidationPassTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->container = $this->getMockBuilder(ContainerBuilder::class)->getMock();
+        $this->container = $this->getMockBuilder(ContainerBuilder::class)->disableOriginalConstructor()->getMock();
         $this->compiler = new ValidationPass();
     }
 
     public function testProcessWithoutValidator(): void
     {
         /** @var ContainerBuilder|MockObject $container */
-        $container = $this->getMockBuilder(ContainerBuilder::class)->getMock();
+        $container = $this->getMockBuilder(ContainerBuilder::class)->disableOriginalConstructor()->getMock();
         $container->expects(static::once())
             ->method('hasDefinition')
             ->with('validator.builder')

@@ -31,7 +31,7 @@ final class KlipperSecurityBundleTest extends TestCase
         $this->expectExceptionMessage('The KlipperSecurityBundle must be registered after the SecurityBundle in your App Kernel');
 
         /** @var ContainerBuilder|MockObject $container */
-        $container = $this->getMockBuilder(ContainerBuilder::class)->getMock();
+        $container = $this->getMockBuilder(ContainerBuilder::class)->disableOriginalConstructor()->getMock();
         $container->expects(static::once())
             ->method('hasExtension')
             ->with('security')

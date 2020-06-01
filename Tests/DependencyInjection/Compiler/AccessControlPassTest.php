@@ -81,7 +81,7 @@ final class AccessControlPassTest extends TestCase
     public function testProcessWithoutAccessControl(): void
     {
         /** @var ContainerBuilder|MockObject $container */
-        $container = $this->getMockBuilder(ContainerBuilder::class)->getMock();
+        $container = $this->getMockBuilder(ContainerBuilder::class)->disableOriginalConstructor()->getMock();
         $container->expects(static::once())
             ->method('hasParameter')
             ->with('klipper_security.access_control')

@@ -120,7 +120,7 @@ final class SecurityExtensionTest extends TestCase
     public function testLoad(): void
     {
         /** @var ContainerBuilder|MockObject $container */
-        $container = $this->getMockBuilder(ContainerBuilder::class)->getMock();
+        $container = $this->getMockBuilder(ContainerBuilder::class)->disableOriginalConstructor()->getMock();
         $accessControl = [
             [
                 'path' => '^/path/',
@@ -157,7 +157,7 @@ final class SecurityExtensionTest extends TestCase
     public function testLoadWithoutControlAccess(): void
     {
         /** @var ContainerBuilder|MockObject $container */
-        $container = $this->getMockBuilder(ContainerBuilder::class)->getMock();
+        $container = $this->getMockBuilder(ContainerBuilder::class)->disableOriginalConstructor()->getMock();
         $configs = [[
             'rule' => 'RULE',
             'access_control' => [],
