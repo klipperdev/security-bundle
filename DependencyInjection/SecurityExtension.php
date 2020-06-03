@@ -25,14 +25,9 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class SecurityExtension extends Extension
 {
-    /**
-     * @var BaseSecurityExtension
-     */
-    private $extension;
+    private BaseSecurityExtension $extension;
 
     /**
-     * Constructor.
-     *
      * @param BaseSecurityExtension $extension The Symfony Security Extension
      */
     public function __construct(BaseSecurityExtension $extension)
@@ -40,25 +35,17 @@ class SecurityExtension extends Extension
         $this->extension = $extension;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getAlias(): string
     {
         return $this->extension->getAlias();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getNamespace(): string
     {
         return $this->extension->getNamespace();
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return false|string
      */
     public function getXsdValidationBasePath()
@@ -97,9 +84,6 @@ class SecurityExtension extends Extension
         $this->extension->addUserProviderFactory($factory);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $parentConfigs = [];

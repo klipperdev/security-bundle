@@ -19,9 +19,6 @@ namespace Klipper\Bundle\SecurityBundle\DependencyInjection\Compiler;
  */
 class PermissionLoaderPass extends AbstractLoaderPass
 {
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         parent::__construct('klipper_security.permission_resolver', 'klipper_security.permission_loader');

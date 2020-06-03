@@ -24,38 +24,24 @@ abstract class AbstractLoaderPass implements CompilerPassInterface
 {
     use PriorityTaggedServiceTrait;
 
-    /**
-     * @var string
-     */
-    private $serviceId;
+    private string $serviceId;
+
+    private string $tagName;
+
+    private int $argumentPosition;
 
     /**
-     * @var string
-     */
-    private $tagName;
-
-    /**
-     * @var int
-     */
-    private $argumentPosition;
-
-    /**
-     * Constructor.
-     *
      * @param string $serviceId        The service id
      * @param string $tagName          The tag name
      * @param int    $argumentPosition The argument position
      */
-    public function __construct($serviceId, $tagName, int $argumentPosition = 0)
+    public function __construct(string $serviceId, string $tagName, int $argumentPosition = 0)
     {
         $this->serviceId = $serviceId;
         $this->tagName = $tagName;
         $this->argumentPosition = $argumentPosition;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition($this->serviceId)) {

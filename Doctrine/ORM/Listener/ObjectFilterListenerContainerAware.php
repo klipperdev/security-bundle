@@ -24,14 +24,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class ObjectFilterListenerContainerAware extends ObjectFilterListener
 {
-    /**
-     * @var ContainerInterface
-     */
-    public $container;
+    public ?ContainerInterface $container = null;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function init(): void
     {
         if (null !== $this->container) {

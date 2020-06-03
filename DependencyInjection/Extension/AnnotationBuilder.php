@@ -25,24 +25,14 @@ use Symfony\Component\Finder\Finder;
  */
 class AnnotationBuilder implements ExtensionBuilderInterface
 {
-    /**
-     * @var KlipperSecurityExtension
-     */
-    private $ext;
+    private KlipperSecurityExtension $ext;
 
-    /**
-     * Constructor.
-     *
-     * @param KlipperSecurityExtension $extension The security extension
-     */
     public function __construct(KlipperSecurityExtension $extension)
     {
         $this->ext = $extension;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws
      */
     public function build(ContainerBuilder $container, LoaderInterface $loader, array $config): void

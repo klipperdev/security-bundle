@@ -12,6 +12,7 @@
 namespace Klipper\Bundle\SecurityBundle\Tests;
 
 use Klipper\Bundle\SecurityBundle\KlipperSecurityBundle;
+use Klipper\Component\Security\Exception\LogicException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -27,7 +28,7 @@ final class KlipperSecurityBundleTest extends TestCase
 {
     public function testSecurityBundleNotRegistered(): void
     {
-        $this->expectException(\Klipper\Component\Security\Exception\LogicException::class);
+        $this->expectException(LogicException::class);
         $this->expectExceptionMessage('The KlipperSecurityBundle must be registered after the SecurityBundle in your App Kernel');
 
         /** @var ContainerBuilder|MockObject $container */

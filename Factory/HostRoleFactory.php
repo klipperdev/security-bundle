@@ -21,17 +21,11 @@ use Symfony\Component\Config\Definition\Builder\NodeDefinition;
  */
 class HostRoleFactory extends AbstractRoleFactory
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getKey(): string
     {
         return 'host_roles';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addConfiguration(NodeDefinition $builder): void
     {
         /* @var ArrayNodeDefinition $builder */

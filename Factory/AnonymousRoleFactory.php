@@ -21,17 +21,11 @@ use Symfony\Component\Config\Definition\Builder\NodeDefinition;
  */
 class AnonymousRoleFactory extends AbstractRoleFactory
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getKey(): string
     {
         return 'anonymous_role';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function addConfiguration(NodeDefinition $builder): void
     {
         /* @var ArrayNodeDefinition $builder */

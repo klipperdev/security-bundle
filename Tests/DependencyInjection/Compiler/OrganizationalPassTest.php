@@ -14,6 +14,7 @@ namespace Klipper\Bundle\SecurityBundle\Tests\DependencyInjection\Compiler;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Compiler\OrganizationalPass;
 use Klipper\Component\Security\Organizational\OrganizationalContext;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -63,7 +64,7 @@ final class OrganizationalPassTest extends TestCase
 
     public function testProcessWithInvalidInterface(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('The service "test" must implement the Klipper\\Component\\Security\\Organizational\\OrganizationalContextInterface');
 
         $container = new ContainerBuilder();

@@ -23,9 +23,6 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class ObjectFilterPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('klipper_security.object_filter.extension')) {

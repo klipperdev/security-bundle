@@ -21,9 +21,6 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class ExpressionVariableStoragePass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->hasDefinition('klipper_security.expression.variable_storage')) {

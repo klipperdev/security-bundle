@@ -34,10 +34,7 @@ final class SecurityExtensionTest extends TestCase
      */
     protected $baseExt;
 
-    /**
-     * @var SecurityExtension
-     */
-    protected $ext;
+    protected ?SecurityExtension $ext = null;
 
     protected function setUp(): void
     {

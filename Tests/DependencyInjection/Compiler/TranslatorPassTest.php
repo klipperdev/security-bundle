@@ -32,10 +32,7 @@ final class TranslatorPassTest extends TestCase
      */
     protected $container;
 
-    /**
-     * @var TranslatorPass
-     */
-    protected $compiler;
+    protected ?TranslatorPass $compiler = null;
 
     protected function setUp(): void
     {

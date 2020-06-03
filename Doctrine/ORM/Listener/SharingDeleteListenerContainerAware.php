@@ -22,14 +22,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class SharingDeleteListenerContainerAware extends SharingDeleteListener
 {
-    /**
-     * @var ContainerInterface
-     */
-    public $container;
+    public ?ContainerInterface $container = null;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function init(): void
     {
         if (null !== $this->container) {

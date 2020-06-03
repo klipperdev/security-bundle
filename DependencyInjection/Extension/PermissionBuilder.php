@@ -25,8 +25,6 @@ use Symfony\Component\DependencyInjection\Reference;
 class PermissionBuilder implements ExtensionBuilderInterface
 {
     /**
-     * {@inheritdoc}
-     *
      * @throws
      */
     public function build(ContainerBuilder $container, LoaderInterface $loader, array $config): void

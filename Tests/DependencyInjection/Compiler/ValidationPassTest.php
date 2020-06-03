@@ -32,10 +32,7 @@ final class ValidationPassTest extends TestCase
      */
     protected $container;
 
-    /**
-     * @var ValidationPass
-     */
-    protected $compiler;
+    protected ?ValidationPass $compiler = null;
 
     protected function setUp(): void
     {

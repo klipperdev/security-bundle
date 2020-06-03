@@ -24,14 +24,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class PermissionCheckerListenerContainerAware extends PermissionCheckerListener
 {
-    /**
-     * @var ContainerInterface
-     */
-    public $container;
+    public ?ContainerInterface $container = null;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function init(): void
     {
         if (null !== $this->container) {

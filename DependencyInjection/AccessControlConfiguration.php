@@ -23,9 +23,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class AccessControlConfiguration implements ConfigurationInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('security');

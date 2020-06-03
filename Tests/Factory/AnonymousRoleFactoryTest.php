@@ -57,7 +57,7 @@ final class AnonymousRoleFactoryTest extends TestCase
      * @param null|array|bool $config   The config
      * @param null|string     $expected The expected value
      */
-    public function testAddConfiguration($config, $expected): void
+    public function testAddConfiguration($config, ?string $expected): void
     {
         $builder = new ArrayNodeDefinition('anonymous_role');
         $factory = new AnonymousRoleFactory();

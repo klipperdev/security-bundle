@@ -27,28 +27,22 @@ class AccessControlPass implements CompilerPassInterface
     /**
      * @var string[]
      */
-    private static $availableExpressionNames = [
+    private static array $availableExpressionNames = [
         'token', 'user', 'object', 'roles', 'request', 'trust_resolver',
     ];
 
     /**
      * @var Reference[]
      */
-    private $requestMatchers = [];
+    private array $requestMatchers = [];
 
     /**
      * @var Reference[]
      */
-    private $expressions = [];
+    private array $expressions = [];
 
-    /**
-     * @var null|ExpressionLanguage
-     */
-    private $expressionLanguage;
+    private ?ExpressionLanguage $expressionLanguage = null;
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->hasParameter('klipper_security.access_control')) {

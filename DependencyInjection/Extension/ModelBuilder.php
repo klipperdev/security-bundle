@@ -19,14 +19,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class ModelBuilder implements ExtensionBuilderInterface
 {
-    /**
-     * @var string
-     */
-    private $alias;
+    private string $alias;
 
     /**
-     * Constructor.
-     *
      * @param string $alias The security extension alias
      */
     public function __construct(string $alias)
@@ -34,9 +29,6 @@ class ModelBuilder implements ExtensionBuilderInterface
         $this->alias = $alias;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function build(ContainerBuilder $container, LoaderInterface $loader, array $config): void
     {
         if ('custom' !== $config['db_driver']) {

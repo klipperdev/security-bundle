@@ -20,8 +20,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class ValidatorBuilder implements ExtensionBuilderInterface
 {
     /**
-     * {@inheritdoc}
-     *
      * @throws
      */
     public function build(ContainerBuilder $container, LoaderInterface $loader, array $config): void

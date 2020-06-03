@@ -19,9 +19,6 @@ namespace Klipper\Bundle\SecurityBundle\DependencyInjection\Compiler;
  */
 class SharingIdentityLoaderPass extends AbstractLoaderPass
 {
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         parent::__construct('klipper_security.sharing_identity_resolver', 'klipper_security.sharing_identity_loader');

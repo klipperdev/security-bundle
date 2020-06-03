@@ -25,9 +25,6 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
  */
 class OrganizationalPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         /** @var ParameterBag $pb */

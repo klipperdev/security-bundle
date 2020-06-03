@@ -37,19 +37,12 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class KlipperSecurityExtension extends Extension
 {
-    /**
-     * {@inheritdoc}
-     *
-     * @throws \ReflectionException
-     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $ref = new \ReflectionClass($this);
-        $configPath = \dirname($ref->getFileName(), 2).'/Resources/config';
-        $loader = new Loader\XmlFileLoader($container, new FileLocator($configPath));
+        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         foreach ($this->getExtensionBuilders() as $extensionBuilder) {
             $extensionBuilder->build($container, $loader, $config);

@@ -28,20 +28,11 @@ use Symfony\Component\Security\Http\AccessMap;
  */
 final class AccessControlPassTest extends TestCase
 {
-    /**
-     * @var ContainerBuilder
-     */
-    protected $container;
+    protected ?ContainerBuilder $container = null;
 
-    /**
-     * @var AccessControlPass
-     */
-    protected $compiler;
+    protected ?AccessControlPass $compiler = null;
 
-    /**
-     * @var array
-     */
-    protected $accessControl = [
+    protected array $accessControl = [
         [
             'path' => '^/path/',
             'allow_if' => 'is_granted("ROLE_ADMIN") and identity("input")',

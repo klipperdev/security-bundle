@@ -22,9 +22,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 class ConfigDependencyValidationPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         if (!$container->hasParameter('klipper_security.missing_services')) {

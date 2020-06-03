@@ -19,7 +19,9 @@ use Klipper\Component\Security\Role\OrganizationalRoleHierarchy;
 use Klipper\Component\Security\SharingVisibilities;
 use Klipper\Component\Security\Tests\Fixtures\Model\MockObject;
 use Klipper\Component\Security\Tests\Fixtures\Model\MockRole;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolver;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 
@@ -66,7 +68,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testOrmObjectFilterVoterWithoutDoctrine(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('The "klipper_security.doctrine.orm.object_filter_voter" config require the "doctrine/orm" package');
 
         $this->createContainer([[
@@ -83,7 +85,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testOrmObjectFilterListenerWithoutDoctrine(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('The "klipper_security.doctrine.orm.listeners.object_filter" config require the "doctrine/orm" package');
 
         $this->createContainer([[
@@ -151,7 +153,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testRoleHierarchyWithoutDoctrineBundle(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('The "klipper_security.role_hierarchy" config require the "doctrine/doctrine-bundle" package');
 
         $this->createContainer([[
@@ -163,7 +165,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testOrmRoleHierarchyListenerWithoutDoctrine(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('The "klipper_security.doctrine.orm.listeners.role_hierarchy" config require the "doctrine/orm" package');
 
         $this->createContainer([[
@@ -230,7 +232,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testExpressionLanguageWitMissingDependenciesForIsGranted(): void
     {
-        $this->expectException(\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException::class);
+        $this->expectException(ServiceNotFoundException::class);
         $this->expectExceptionMessage('The service "klipper_security.expression.functions.is_granted" has a dependency on a non-existent service "security.authorization_checker"');
 
         $this->createContainer([[
@@ -247,7 +249,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testExpressionLanguageWitMissingDependenciesForIsOrganization(): void
     {
-        $this->expectException(\Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException::class);
+        $this->expectException(ServiceNotFoundException::class);
         $this->expectExceptionMessage('The service "klipper_security.expression.functions.is_organization" has a dependency on a non-existent service "klipper_security.organizational_context"');
 
         $this->createContainer([[
@@ -282,7 +284,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testOrmSharingWithoutDoctrine(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('The "klipper_security.doctrine.orm.filter.sharing" config require the "doctrine/orm" package');
 
         $this->createContainer([[
@@ -301,7 +303,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testOrmSharingDoctrineWithoutEnableSharing(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('The "klipper_security.sharing" config must be enabled');
 
         $this->createContainer([[
@@ -342,7 +344,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testOrmSharingPrivateListenerWithoutDoctrine(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('The "klipper_security.doctrine.orm.filter.sharing" config require the "doctrine/orm" package');
 
         $this->createContainer([[
@@ -364,7 +366,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testOrmSharingPrivateListenerWithoutEnableSharing(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('The "klipper_security.doctrine.orm.filters.sharing" config must be enabled');
 
         $this->createContainer([[
@@ -402,7 +404,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testOrmSharingDeleteWithoutDoctrine(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('The "klipper_security.doctrine.orm.listeners.sharing_delete" config require the "doctrine/orm" package');
 
         $this->createContainer([[
@@ -421,7 +423,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testOrmSharingDeleteDoctrineWithoutEnableSharing(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('The "klipper_security.sharing" config must be enabled');
 
         $this->createContainer([[
@@ -466,7 +468,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testPermissionWithNonExistentClass(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('The "FooBar" permission class does not exist');
 
         $this->createContainer([[
@@ -499,7 +501,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testPermissionWithNonExistentField(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('The permission field "foo" does not exist in "Klipper\\Component\\Security\\Tests\\Fixtures\\Model\\MockObject" class');
 
         $this->createContainer([[
@@ -515,7 +517,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testOrmPermissionCheckerListenerWithoutDoctrine(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('The "klipper_security.doctrine.orm.listeners.permission_checker" config require the "doctrine/orm" package');
 
         $this->createContainer([[
@@ -576,7 +578,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testSharingWithNonExistentIdentityClass(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('The "FooBar" sharing identity class does not exist');
 
         $this->createContainer([[
@@ -614,7 +616,7 @@ final class KlipperSecurityExtensionTest extends AbstractSecurityExtensionTest
 
     public function testSharingWithNonExistentSubjectClass(): void
     {
-        $this->expectException(\Symfony\Component\Config\Definition\Exception\InvalidConfigurationException::class);
+        $this->expectException(InvalidConfigurationException::class);
         $this->expectExceptionMessage('The "FooBar" sharing subject class does not exist');
 
         $this->createContainer([[

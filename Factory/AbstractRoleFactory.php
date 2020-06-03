@@ -22,10 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 abstract class AbstractRoleFactory implements SecurityFactoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function create(ContainerBuilder $container, $id, $config, $userProvider, $defaultEntryPoint): array
+    public function create(ContainerBuilder $container, string $id, array $config, string $userProvider, ?string $defaultEntryPoint): array
     {
         $providerId = $this->getServiceId('provider').'.'.$id;
         $container
@@ -41,9 +38,6 @@ abstract class AbstractRoleFactory implements SecurityFactoryInterface
         return [$providerId, $listenerId, $defaultEntryPoint];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPosition(): string
     {
         return 'pre_auth';
@@ -51,10 +45,8 @@ abstract class AbstractRoleFactory implements SecurityFactoryInterface
 
     /**
      * Get the service id.
-     *
-     * @param string $type The type
      */
-    protected function getServiceId($type): string
+    protected function getServiceId(string $type): string
     {
         return sprintf('klipper_security.authentication.%s.%s', $type, $this->getKey());
     }
