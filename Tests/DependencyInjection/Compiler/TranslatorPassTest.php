@@ -76,19 +76,14 @@ final class TranslatorPassTest extends TestCase
         ;
 
         $translator->expects(static::once())
-            ->method('getArguments')
-            ->willReturn([null, null, [], []])
-        ;
-
-        $translator->expects(static::once())
             ->method('getArgument')
-            ->with(3)
+            ->with(4)
             ->willReturn([])
         ;
 
         $translator->expects(static::once())
             ->method('replaceArgument')
-            ->with(3, [
+            ->with(4, [
                 'resource_files' => [
                     'en' => [
                         $file,

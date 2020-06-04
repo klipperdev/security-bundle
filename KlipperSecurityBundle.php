@@ -45,7 +45,7 @@ class KlipperSecurityBundle extends Bundle
 
         $container->addCompilerPass(new ConfigDependencyValidationPass());
         $container->addCompilerPass(new ValidationPass());
-        $container->addCompilerPass(new TranslatorPass());
+        $container->addCompilerPass(new TranslatorPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, -64);
         $container->addCompilerPass(new ExpressionVariableStoragePass());
         $container->addCompilerPass(new ObjectFilterPass());
         $container->addCompilerPass(new OrganizationalPass());
