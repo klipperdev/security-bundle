@@ -99,7 +99,7 @@
         <!-- Permission Exception Listener -->
         <service id="klipper_security.listener.permission_exception"
                  class="Klipper\Component\Security\Listener\PermissionExceptionListener">
-            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException"/>
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" priority="90"/>
         </service>
 
         <!-- Voter -->
