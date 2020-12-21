@@ -54,6 +54,7 @@ abstract class AbstractSecurityExtensionTest extends TestCase
             'kernel.root_dir' => sys_get_temp_dir().'/klipper_security_bundle',
             'kernel.project_dir' => sys_get_temp_dir().'/klipper_security_bundle',
             'kernel.charset' => 'UTF-8',
+            'kernel.container_class' => 'TestContainer',
         ]));
 
         $container->setParameter('doctrine.default_entity_manager', 'test');
