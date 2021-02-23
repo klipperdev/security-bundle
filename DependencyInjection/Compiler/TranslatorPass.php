@@ -82,7 +82,7 @@ class TranslatorPass implements CompilerPassInterface
         ;
 
         foreach ($finder->getIterator() as $file) {
-            list(, $locale) = explode('.', $file->getBasename(), 3);
+            [, $locale] = explode('.', $file->getBasename(), 3);
             if (!isset($files[$locale])) {
                 $files[$locale] = [];
             }

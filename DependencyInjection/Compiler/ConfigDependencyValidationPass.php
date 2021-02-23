@@ -31,7 +31,7 @@ class ConfigDependencyValidationPass implements CompilerPassInterface
         $missingServices = $container->getParameter('klipper_security.missing_services');
 
         foreach ($missingServices as $config => $serviceInfo) {
-            list($service, $package) = $serviceInfo;
+            [$service, $package] = $serviceInfo;
 
             if (!$container->hasDefinition($service) && !$container->hasAlias($service)) {
                 $msg = 'The "klipper_security.%s" config require the "%s" package';
