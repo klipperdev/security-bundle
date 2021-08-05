@@ -57,7 +57,7 @@ final class TranslatorPassTest extends TestCase
     {
         $reflection = new \ReflectionClass(PermissionContexts::class);
         $dirname = \dirname($reflection->getFileName());
-        $file = realpath($dirname.'/Resources/config/translations/validators.en.xlf');
+        $file = realpath($dirname.'/Resources/config/translations/validators.en.yaml');
 
         static::assertFileExists($file);
 
@@ -87,6 +87,9 @@ final class TranslatorPassTest extends TestCase
                 'resource_files' => [
                     'en' => [
                         $file,
+                    ],
+                    'fr' => [
+                        realpath($dirname.'/Resources/config/translations/validators.fr.yaml'),
                     ],
                 ],
             ])
