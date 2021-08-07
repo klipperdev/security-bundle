@@ -16,14 +16,13 @@ use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\UserProvider\User
 use Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension as BaseSecurityExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * Enhances the access_control section of the SecurityBundle.
  *
  * @author François Pluchino <francois.pluchino@klipper.dev>
  */
-class SecurityExtension extends Extension
+class SecurityExtension extends BaseSecurityExtension
 {
     private BaseSecurityExtension $extension;
 
@@ -32,6 +31,8 @@ class SecurityExtension extends Extension
      */
     public function __construct(BaseSecurityExtension $extension)
     {
+        parent::__construct();
+
         $this->extension = $extension;
     }
 
@@ -82,6 +83,11 @@ class SecurityExtension extends Extension
     public function addUserProviderFactory(UserProviderFactoryInterface $factory): void
     {
         $this->extension->addUserProviderFactory($factory);
+    }
+
+    public function prepend(ContainerBuilder $container): void
+    {
+        // Skip
     }
 
     public function load(array $configs, ContainerBuilder $container): void
