@@ -18,6 +18,7 @@ use Klipper\Bundle\SecurityBundle\DependencyInjection\Compiler\ObjectFilterPass;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Compiler\OrganizationalPass;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Compiler\PermissionLoaderPass;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Compiler\RoleHierarchyVoterPass;
+use Klipper\Bundle\SecurityBundle\DependencyInjection\Compiler\SecurityRegisterListenerPass;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Compiler\SharingIdentityLoaderPass;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Compiler\SharingSubjectLoaderPass;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Compiler\TranslatorPass;
@@ -29,7 +30,6 @@ use Klipper\Component\Security\Exception\LogicException;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension as BaseSecurityExtension;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\EventDispatcher\DependencyInjection\RegisterListenersPass;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -53,14 +53,7 @@ class KlipperSecurityBundle extends Bundle
         $container->addCompilerPass(new SharingIdentityLoaderPass());
         $container->addCompilerPass(new PermissionLoaderPass());
         $container->addCompilerPass(new RoleHierarchyVoterPass(), PassConfig::TYPE_BEFORE_OPTIMIZATION, 100);
-        $container->addCompilerPass(
-            new RegisterListenersPass(
-                'event_dispatcher',
-                'klipper_security.event_listener',
-                'klipper_security.event_subscriber'
-            ),
-            PassConfig::TYPE_BEFORE_REMOVING
-        );
+        $container->addCompilerPass(new SecurityRegisterListenerPass(), PassConfig::TYPE_BEFORE_REMOVING);
     }
 
     /**
