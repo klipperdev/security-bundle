@@ -7,9 +7,9 @@
     <services>
         <!-- Doctrine ORM Sharing Delete Listener -->
         <service id="klipper_security.orm.listener.sharing_delete"
-                 class="Klipper\Bundle\SecurityBundle\Doctrine\ORM\Listener\SharingDeleteListenerContainerAware">
+                 class="Klipper\Component\Security\Doctrine\ORM\Listener\SharingDeleteListener">
             <tag name="doctrine.event_subscriber" priority="1"/>
-            <property name="container" type="service" id="service_container"/>
+            <argument type="service" id="klipper_security.sharing_manager"/>
         </service>
     </services>
 </container>

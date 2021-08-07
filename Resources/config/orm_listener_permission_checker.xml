@@ -7,9 +7,11 @@
     <services>
         <!-- Doctrine ORM Permission Checker Listener -->
         <service id="klipper_security.permission_checker.orm.listener"
-                 class="Klipper\Bundle\SecurityBundle\Doctrine\ORM\Listener\PermissionCheckerListenerContainerAware">
+                 class="Klipper\Component\Security\Doctrine\ORM\Listener\PermissionCheckerListener">
             <tag name="doctrine.event_subscriber" priority="256"/>
-            <property name="container" type="service" id="service_container"/>
+            <argument type="service" id="klipper_security.permission_manager"/>
+            <argument type="service" id="security.token_storage"/>
+            <argument type="service" id="security.authorization_checker"/>
         </service>
     </services>
 </container>

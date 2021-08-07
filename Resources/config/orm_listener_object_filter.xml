@@ -7,9 +7,11 @@
     <services>
         <!-- Doctrine ORM Object Filter Listener -->
         <service id="klipper_security.object_filter.orm.listener"
-                 class="Klipper\Bundle\SecurityBundle\Doctrine\ORM\Listener\ObjectFilterListenerContainerAware">
+                 class="Klipper\Component\Security\Doctrine\ORM\Listener\ObjectFilterListener">
             <tag name="doctrine.event_subscriber" priority="255"/>
-            <property name="container" type="service" id="service_container"/>
+            <argument type="service" id="klipper_security.permission_manager"/>
+            <argument type="service" id="security.token_storage"/>
+            <argument type="service" id="klipper_security.object_filter"/>
         </service>
     </services>
 </container>
