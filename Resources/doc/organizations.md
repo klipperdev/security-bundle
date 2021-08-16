@@ -120,7 +120,6 @@ class User implements UserInterface
      * @ORM\OneToOne(
      *     targetEntity="App\Entity\Organization",
      *     mappedBy="user",
-     *     fetch="EAGER",
      *     orphanRemoval=true,
      *     cascade={"persist", "remove"}
      * )
@@ -169,7 +168,6 @@ class Role implements RoleHierarchicalInterface
     /**
      * @ORM\ManyToOne(
      *     targetEntity="App\Entity\Organization",
-     *     fetch="EXTRA_LAZY",
      *     inversedBy="organizationRoles"
      * )
      * @ORM\JoinColumn(onDelete="CASCADE")
@@ -237,7 +235,6 @@ class Group implements GroupInterface, OrganizationalOptionalInterface
     /**
      * @ORM\ManyToOne(
      *     targetEntity="App\Entity\Organization",
-     *     fetch="EXTRA_LAZY",
      *     inversedBy="organizationGroups"
      * )
      * @ORM\JoinColumn(onDelete="CASCADE")
