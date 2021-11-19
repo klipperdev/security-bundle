@@ -26,6 +26,8 @@ class OrganizationalContextBuilder implements ExtensionBuilderInterface
     {
         if ($config['organizational_context']['enabled']) {
             $loader->load('organizational_context.xml');
+            $loader->load('orm_provider_organizational_user.xml');
+
             $id = 'klipper_security.organizational_context.service_id';
             $container->setParameter($id, $config['organizational_context']['service_id']);
         }

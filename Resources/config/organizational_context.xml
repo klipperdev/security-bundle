@@ -32,7 +32,9 @@
                  class="Klipper\Component\Security\Listener\OrganizationSecurityIdentitySubscriber">
             <tag name="klipper_security.event_subscriber"/>
             <argument type="service" id="security.role_hierarchy"/>
+            <argument type="service" id="security.token_storage"/>
             <argument type="service" id="klipper_security.organizational_context"/>
+            <argument type="service" id="klipper_security.organization_user_provider" on-invalid="null"/>
         </service>
     </services>
 </container>
