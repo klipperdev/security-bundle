@@ -31,8 +31,6 @@ class SecurityExtension extends BaseSecurityExtension
      */
     public function __construct(BaseSecurityExtension $extension)
     {
-        parent::__construct();
-
         $this->extension = $extension;
     }
 
