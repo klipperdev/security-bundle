@@ -76,7 +76,14 @@ abstract class AbstractSecurityExtensionTest extends TestCase
             $container->setDefinition($id, $definition);
         }
 
-        $sfExt->load([['form' => true]], $container);
+        $sfExt->load([
+            [
+                'messenger' => [
+                    'reset_on_message' => true,
+                ],
+                'form' => true,
+            ],
+        ], $container);
         $extension->load($configs, $container);
 
         $bundle = new KlipperSecurityBundle();
