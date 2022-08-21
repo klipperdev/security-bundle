@@ -14,7 +14,7 @@ namespace Klipper\Bundle\SecurityBundle\Tests\DependencyInjection;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\SecurityExtension;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\SecurityFactoryInterface;
+use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\AuthenticatorFactoryInterface;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\UserProvider\UserProviderFactoryInterface;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension as BaseSecurityExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -88,17 +88,17 @@ final class SecurityExtensionTest extends TestCase
         static::assertSame($configuration, $this->ext->getConfiguration($config, $container));
     }
 
-    public function testAddSecurityListenerFactory(): void
+    public function testAddAuthenticatorFactory(): void
     {
-        /** @var SecurityFactoryInterface $factory */
-        $factory = $this->getMockBuilder(SecurityFactoryInterface::class)->getMock();
+        /** @var AuthenticatorFactoryInterface $factory */
+        $factory = $this->getMockBuilder(AuthenticatorFactoryInterface::class)->getMock();
 
         $this->baseExt->expects(static::once())
-            ->method('addSecurityListenerFactory')
+            ->method('addAuthenticatorFactory')
             ->with($factory)
         ;
 
-        $this->ext->addSecurityListenerFactory($factory);
+        $this->ext->addAuthenticatorFactory($factory);
     }
 
     public function testAddUserProviderFactory(): void

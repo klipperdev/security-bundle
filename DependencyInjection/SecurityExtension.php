@@ -11,7 +11,7 @@
 
 namespace Klipper\Bundle\SecurityBundle\DependencyInjection;
 
-use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\SecurityFactoryInterface;
+use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\AuthenticatorFactoryInterface;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\UserProvider\UserProviderFactoryInterface;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension as BaseSecurityExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -65,12 +65,10 @@ class SecurityExtension extends BaseSecurityExtension
 
     /**
      * Add the security factory.
-     *
-     * @param SecurityFactoryInterface $factory The security factory
      */
-    public function addSecurityListenerFactory(SecurityFactoryInterface $factory): void
+    public function addAuthenticatorFactory(AuthenticatorFactoryInterface $factory): void
     {
-        $this->extension->addSecurityListenerFactory($factory);
+        $this->extension->addAuthenticatorFactory($factory);
     }
 
     /**

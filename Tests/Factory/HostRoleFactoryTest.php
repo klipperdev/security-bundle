@@ -25,11 +25,11 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 final class HostRoleFactoryTest extends TestCase
 {
-    public function testGetPosition(): void
+    public function testGetPriority(): void
     {
         $factory = new HostRoleFactory();
 
-        static::assertSame('pre_auth', $factory->getPosition());
+        static::assertSame(-10, $factory->getPriority());
     }
 
     public function testGetKey(): void
@@ -48,21 +48,30 @@ final class HostRoleFactoryTest extends TestCase
         static::assertCount(1, $builder->getChildNodeDefinitions());
     }
 
-    public function testCreate(): void
+    public function testCreateAuthenticator(): void
+    {
+        $container = new ContainerBuilder();
+        $factory = new HostRoleFactory();
+
+        $authenticator = $factory->createAuthenticator($container, 'test_firewall', [], 'user_provider_id');
+
+        static::assertIsArray($authenticator);
+        static::assertEmpty($authenticator);
+    }
+
+    public function testCreateListeners(): void
     {
         $container = new ContainerBuilder();
         $factory = new HostRoleFactory();
 
         static::assertCount(1, $container->getDefinitions());
 
-        $res = $factory->create($container, 'test_id', [], 'user_provider', 'default_entry_point');
+        $res = $factory->createListeners($container, 'test_firewall', []);
         $valid = [
-            'klipper_security.authentication.provider.host_roles.test_id',
-            'klipper_security.authentication.listener.host_roles.test_id',
-            'default_entry_point',
+            'klipper_security.authenticator.host_roles.firewall_listener.test_firewall',
         ];
 
         static::assertEquals($valid, $res);
-        static::assertCount(3, $container->getDefinitions());
+        static::assertCount(2, $container->getDefinitions());
     }
 }

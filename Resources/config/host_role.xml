@@ -5,15 +5,10 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <!-- Authentication Provider -->
-        <service id="klipper_security.authentication.provider.host_roles"
-                 class="Klipper\Component\Security\Authentication\Provider\HostRoleProvider">
-            <argument type="collection"/>
-        </service>
-
         <!-- Security Firewall -->
-        <service id="klipper_security.authentication.listener.host_roles"
-                 class="Klipper\Component\Security\Firewall\HostRoleListener">
+        <service id="klipper_security.authenticator.host_roles.firewall_listener"
+                 class="Klipper\Component\Security\Firewall\HostRoleFirewallListener"
+                 abstract="true">
             <argument type="service" id="klipper_security.security_identity_manager"/>
             <argument type="collection"/>
         </service>

@@ -17,16 +17,16 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * @author François Pluchino <francois.pluchino@klipper.dev>
  */
-class AnonymousRoleBuilder implements ExtensionBuilderInterface
+class PublicRoleBuilder implements ExtensionBuilderInterface
 {
     /**
      * @throws
      */
     public function build(ContainerBuilder $container, LoaderInterface $loader, array $config): void
     {
-        $loader->load('anonymous_role.xml');
+        $loader->load('public_role.xml');
 
-        $def = $container->getDefinition('klipper_security.authentication.listener.anonymous_role');
-        $def->addMethodCall('setEnabled', [$config['anonymous_role']['enabled']]);
+        $def = $container->getDefinition('klipper_security.authenticator.public_role.firewall_listener');
+        $def->addMethodCall('setEnabled', [$config['public_role']['enabled']]);
     }
 }

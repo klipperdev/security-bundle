@@ -47,7 +47,7 @@ class Configuration implements ConfigurationInterface
             ->end()
             ->end()
             ->append($this->getHostRoleNode())
-            ->append($this->getAnonymousRoleNode())
+            ->append($this->getPublicRoleNode())
             ->append($this->getRoleHierarchyNode())
             ->append($this->getSecurityVoterNode())
             ->append($this->getObjectFilterNode())
@@ -75,11 +75,11 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Get anonymous role node.
+     * Get public role node.
      */
-    private function getAnonymousRoleNode(): NodeDefinition
+    private function getPublicRoleNode(): NodeDefinition
     {
-        return NodeUtils::createArrayNode('anonymous_role')
+        return NodeUtils::createArrayNode('public_role')
             ->addDefaultsIfNotSet()
             ->canBeEnabled()
         ;

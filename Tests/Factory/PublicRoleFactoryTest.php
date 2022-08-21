@@ -11,42 +11,42 @@
 
 namespace Klipper\Bundle\SecurityBundle\Tests\Factory;
 
-use Klipper\Bundle\SecurityBundle\Factory\AnonymousRoleFactory;
+use Klipper\Bundle\SecurityBundle\Factory\PublicRoleFactory;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Anonymous Role Factory Tests.
+ * Public Role Factory Tests.
  *
  * @author François Pluchino <francois.pluchino@klipper.dev>
  *
  * @internal
  */
-final class AnonymousRoleFactoryTest extends TestCase
+final class PublicRoleFactoryTest extends TestCase
 {
-    public function testGetPosition(): void
+    public function testGetPriority(): void
     {
-        $factory = new AnonymousRoleFactory();
+        $factory = new PublicRoleFactory();
 
-        static::assertSame('pre_auth', $factory->getPosition());
+        static::assertSame(-10, $factory->getPriority());
     }
 
     public function testGetKey(): void
     {
-        $factory = new AnonymousRoleFactory();
+        $factory = new PublicRoleFactory();
 
-        static::assertSame('anonymous_role', $factory->getKey());
+        static::assertSame('public_role', $factory->getKey());
     }
 
     public function getConfiguration(): array
     {
         return [
-            [true, 'ROLE_ANONYMOUS'],
+            [true, 'ROLE_PUBLIC'],
             [false, null],
             [null, null],
-            [['role' => 'ROLE_CUSTOM_ANONYMOUS'], 'ROLE_CUSTOM_ANONYMOUS'],
+            [['role' => 'ROLE_CUSTOM_PUBLIC'], 'ROLE_CUSTOM_PUBLIC'],
             [['role' => null], null],
         ];
     }
@@ -59,8 +59,8 @@ final class AnonymousRoleFactoryTest extends TestCase
      */
     public function testAddConfiguration($config, ?string $expected): void
     {
-        $builder = new ArrayNodeDefinition('anonymous_role');
-        $factory = new AnonymousRoleFactory();
+        $builder = new ArrayNodeDefinition('public_role');
+        $factory = new PublicRoleFactory();
 
         $factory->addConfiguration($builder);
         static::assertCount(1, $builder->getChildNodeDefinitions());
@@ -74,21 +74,30 @@ final class AnonymousRoleFactoryTest extends TestCase
         static::assertSame($expected, $res['role']);
     }
 
-    public function testCreate(): void
+    public function testCreateAuthenticator(): void
     {
         $container = new ContainerBuilder();
-        $factory = new AnonymousRoleFactory();
+        $factory = new PublicRoleFactory();
+
+        $authenticator = $factory->createAuthenticator($container, 'test_firewall', [], 'user_provider_id');
+
+        static::assertIsArray($authenticator);
+        static::assertEmpty($authenticator);
+    }
+
+    public function testCreateListeners(): void
+    {
+        $container = new ContainerBuilder();
+        $factory = new PublicRoleFactory();
 
         static::assertCount(1, $container->getDefinitions());
 
-        $res = $factory->create($container, 'test_id', [], 'user_provider', 'default_entry_point');
+        $res = $factory->createListeners($container, 'test_firewall', []);
         $valid = [
-            'klipper_security.authentication.provider.anonymous_role.test_id',
-            'klipper_security.authentication.listener.anonymous_role.test_id',
-            'default_entry_point',
+            'klipper_security.authenticator.public_role.firewall_listener.test_firewall',
         ];
 
         static::assertEquals($valid, $res);
-        static::assertCount(3, $container->getDefinitions());
+        static::assertCount(2, $container->getDefinitions());
     }
 }

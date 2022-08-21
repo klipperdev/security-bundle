@@ -12,7 +12,6 @@
 namespace Klipper\Bundle\SecurityBundle\DependencyInjection;
 
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Extension\AnnotationBuilder;
-use Klipper\Bundle\SecurityBundle\DependencyInjection\Extension\AnonymousRoleBuilder;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Extension\ExpressionLanguageBuilder;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Extension\ExtensionBuilderInterface;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Extension\HostRoleBuilder;
@@ -20,6 +19,7 @@ use Klipper\Bundle\SecurityBundle\DependencyInjection\Extension\ModelBuilder;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Extension\ObjectFilterBuilder;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Extension\OrganizationalContextBuilder;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Extension\PermissionBuilder;
+use Klipper\Bundle\SecurityBundle\DependencyInjection\Extension\PublicRoleBuilder;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Extension\RoleHierarchyBuilder;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Extension\SecurityIdentityBuilder;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Extension\SecurityVoterBuilder;
@@ -62,7 +62,7 @@ class KlipperSecurityExtension extends Extension
             new PermissionBuilder(),
             new ObjectFilterBuilder(),
             new HostRoleBuilder(),
-            new AnonymousRoleBuilder(),
+            new PublicRoleBuilder(),
             new RoleHierarchyBuilder(),
             new SecurityVoterBuilder(),
             new OrganizationalContextBuilder(),

@@ -189,5 +189,5 @@ The following documents are available:
 - [Using the sharing entries](sharing.md)
 - [Using the organizations](organizations.md)
 - [Using the object filter](object_filter.md)
-- [Using the anonymous role](anonymous_role.md)
+- [Using the public role](public_role.md)
 - [Using the host role](host_role.md)

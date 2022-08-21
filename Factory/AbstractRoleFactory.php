@@ -11,7 +11,8 @@
 
 namespace Klipper\Bundle\SecurityBundle\Factory;
 
-use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\SecurityFactoryInterface;
+use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\AuthenticatorFactoryInterface;
+use Symfony\Bundle\SecurityBundle\DependencyInjection\Security\Factory\FirewallListenerFactoryInterface;
 use Symfony\Component\DependencyInjection\ChildDefinition;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -20,34 +21,26 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * @author François Pluchino <francois.pluchino@klipper.dev>
  */
-abstract class AbstractRoleFactory implements SecurityFactoryInterface
+abstract class AbstractRoleFactory implements AuthenticatorFactoryInterface, FirewallListenerFactoryInterface
 {
-    public function create(ContainerBuilder $container, string $id, array $config, string $userProvider, ?string $defaultEntryPoint): array
+    public function getPriority(): int
     {
-        $providerId = $this->getServiceId('provider').'.'.$id;
-        $container
-            ->setDefinition($providerId, new ChildDefinition($this->getServiceId('provider')))
-        ;
+        return -10;
+    }
 
-        $listenerId = $this->getServiceId('listener').'.'.$id;
+    public function createAuthenticator(ContainerBuilder $container, string $firewallName, array $config, string $userProviderId): array
+    {
+        return [];
+    }
+
+    public function createListeners(ContainerBuilder $container, string $firewallName, array $config): array
+    {
+        $listenerId = 'klipper_security.authenticator.'.$this->getKey().'.firewall_listener.'.$firewallName;
         $container
-            ->setDefinition($listenerId, new ChildDefinition($this->getServiceId('listener')))
+            ->setDefinition($listenerId, new ChildDefinition('klipper_security.authenticator.'.$this->getKey().'.firewall_listener'))
             ->replaceArgument(1, $config)
         ;
 
-        return [$providerId, $listenerId, $defaultEntryPoint];
-    }
-
-    public function getPosition(): string
-    {
-        return 'pre_auth';
-    }
-
-    /**
-     * Get the service id.
-     */
-    protected function getServiceId(string $type): string
-    {
-        return sprintf('klipper_security.authentication.%s.%s', $type, $this->getKey());
+        return [$listenerId];
     }
 }

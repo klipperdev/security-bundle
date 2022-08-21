@@ -24,8 +24,8 @@ use Klipper\Bundle\SecurityBundle\DependencyInjection\Compiler\SharingSubjectLoa
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Compiler\TranslatorPass;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\Compiler\ValidationPass;
 use Klipper\Bundle\SecurityBundle\DependencyInjection\SecurityExtension;
-use Klipper\Bundle\SecurityBundle\Factory\AnonymousRoleFactory;
 use Klipper\Bundle\SecurityBundle\Factory\HostRoleFactory;
+use Klipper\Bundle\SecurityBundle\Factory\PublicRoleFactory;
 use Klipper\Component\Security\Exception\LogicException;
 use Symfony\Bundle\SecurityBundle\DependencyInjection\SecurityExtension as BaseSecurityExtension;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
@@ -69,8 +69,8 @@ class KlipperSecurityBundle extends Bundle
 
         /** @var BaseSecurityExtension $extension */
         $extension = $container->getExtension('security');
-        $extension->addSecurityListenerFactory(new HostRoleFactory());
-        $extension->addSecurityListenerFactory(new AnonymousRoleFactory());
+        $extension->addAuthenticatorFactory(new HostRoleFactory());
+        $extension->addAuthenticatorFactory(new PublicRoleFactory());
 
         $container->registerExtension(new SecurityExtension($extension));
         $container->addCompilerPass(new AccessControlPass());

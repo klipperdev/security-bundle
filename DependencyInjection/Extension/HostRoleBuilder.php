@@ -26,7 +26,7 @@ class HostRoleBuilder implements ExtensionBuilderInterface
     {
         $loader->load('host_role.xml');
 
-        $def = $container->getDefinition('klipper_security.authentication.listener.host_roles');
+        $def = $container->getDefinition('klipper_security.authenticator.host_roles.firewall_listener');
         $def->addMethodCall('setEnabled', [$config['host_role']['enabled']]);
     }
 }

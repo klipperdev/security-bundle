@@ -15,29 +15,29 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 
 /**
- * Factory for anonymous role injection in security identity manager.
+ * Factory for public role injection in security identity manager.
  *
  * @author François Pluchino <francois.pluchino@klipper.dev>
  */
-class AnonymousRoleFactory extends AbstractRoleFactory
+class PublicRoleFactory extends AbstractRoleFactory
 {
     public function getKey(): string
     {
-        return 'anonymous_role';
+        return 'public_role';
     }
 
     public function addConfiguration(NodeDefinition $builder): void
     {
         /* @var ArrayNodeDefinition $builder */
         $builder
-            ->example('ROLE_CUSTOM_ANONYMOUS')
+            ->example('ROLE_CUSTOM_PUBLIC')
             ->addDefaultsIfNotSet()
             ->beforeNormalization()
             ->ifTrue(static function ($v) {
                 return \is_bool($v) || \is_string($v);
             })
             ->then(function ($v) {
-                return ['role' => $this->getAnonymousRole($v)];
+                return ['role' => $this->getPublicRole($v)];
             })
             ->end()
             ->children()
@@ -49,10 +49,10 @@ class AnonymousRoleFactory extends AbstractRoleFactory
     /**
      * @param null|bool|string $v
      */
-    private function getAnonymousRole($v): ?string
+    private function getPublicRole($v): ?string
     {
         if (true === $v) {
-            $v = 'ROLE_ANONYMOUS';
+            $v = 'ROLE_PUBLIC';
         }
 
         return \is_string($v)
