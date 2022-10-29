@@ -176,9 +176,9 @@ class AccessControlPass implements CompilerPassInterface
      *
      * @param ContainerBuilder $container The container
      *
-     * @throws
-     *
      * @return ExpressionFunctionProviderInterface[]
+     *
+     * @throws
      */
     private function getExpressionFunctions(ContainerBuilder $container): array
     {

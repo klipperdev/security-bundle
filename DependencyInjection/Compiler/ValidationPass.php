@@ -44,9 +44,9 @@ class ValidationPass implements CompilerPassInterface
      *
      * @param ContainerBuilder $container The container
      *
-     * @throws
-     *
      * @return string[]
+     *
+     * @throws
      */
     private function getValidatorMappingFiles(ContainerBuilder $container): array
     {
